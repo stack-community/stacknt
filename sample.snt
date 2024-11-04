@@ -1,0 +1,21 @@
+0 "i" let
+{ i 100 < } {
+    i 1 + "i" let
+
+    i 15 % 0 = {
+        "FizzBuzz" println
+        2 return
+    } when
+
+    i 3 % 0 = {
+        "Fizz" println
+        2 return
+    } when
+
+    i 5 % 0 = {
+        "Buzz" println
+        2 return
+    } when
+
+    i println
+} while
