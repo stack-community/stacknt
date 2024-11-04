@@ -166,6 +166,38 @@ impl Core {
                     })),
                 ),
                 (
+                    "<".to_string(),
+                    Type::Function(Function::BuiltIn(|core| {
+                        let b = core.pop().get_number();
+                        let a = core.pop().get_number();
+                        core.stack.push(Type::Bool(a < b))
+                    })),
+                ),
+                (
+                    "<=".to_string(),
+                    Type::Function(Function::BuiltIn(|core| {
+                        let b = core.pop().get_number();
+                        let a = core.pop().get_number();
+                        core.stack.push(Type::Bool(a <= b))
+                    })),
+                ),
+                (
+                    ">".to_string(),
+                    Type::Function(Function::BuiltIn(|core| {
+                        let b = core.pop().get_number();
+                        let a = core.pop().get_number();
+                        core.stack.push(Type::Bool(a > b))
+                    })),
+                ),
+                (
+                    ">=".to_string(),
+                    Type::Function(Function::BuiltIn(|core| {
+                        let b = core.pop().get_number();
+                        let a = core.pop().get_number();
+                        core.stack.push(Type::Bool(a = b))
+                    })),
+                ),
+                (
                     "!=".to_string(),
                     Type::Function(Function::BuiltIn(|core| {
                         let b = core.pop().get_string();
