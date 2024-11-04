@@ -244,6 +244,10 @@ impl Core {
                             core.pop().get_bool()
                         } {
                             core.eval(code_true.clone());
+                            if core.returns != 0 {
+                                core.returns -= 1;
+                                return;
+                            }
                         }
                     })),
                 ),
@@ -304,6 +308,8 @@ impl Core {
             let mut token = token.trim().to_string();
             if let Ok(n) = token.parse::<f64>() {
                 result.push(Type::Number(n));
+            } else if let Ok(b) = token.parse::<bool>() {
+                result.push(Type::Bool(b));
             } else if token.starts_with('"') && token.ends_with('"') {
                 token.remove(token.find('"').unwrap_or_default());
                 token.remove(token.rfind('"').unwrap_or_default());
@@ -394,6 +400,7 @@ impl Core {
                 }
                 other => self.stack.push(other),
             }
+
             if self.returns != 0 {
                 self.returns -= 1;
                 return;
